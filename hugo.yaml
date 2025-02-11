@@ -19,7 +19,7 @@ markup:
 menu:
   main:
     - name: Write-ups
-      pageRef: /docs/write-ups
+      pageRef: /write-ups
       weight: 1
     - name: About
       pageRef: /about
