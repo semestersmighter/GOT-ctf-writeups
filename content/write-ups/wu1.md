@@ -1,7 +1,7 @@
 ---
 title: Writes-up 1
-next: wu2
+next: "/write-ups/wu2"
+prev: ""
 ---
-
 
 c'est le 1

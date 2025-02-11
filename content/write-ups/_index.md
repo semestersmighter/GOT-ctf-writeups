@@ -1,13 +1,9 @@
 ---
 title: Writes-ups
-next: wu1
+next: "/write-ups/wu1"
 ---
 
-
-## Les writes up des différentes attaques de ce CTF 
-
-
-
+## Les writes up des différentes attaques de ce CTF
 
 {{< cards >}}
   {{< card link="wu1" title="Write-up 1" icon="book-open" >}}
