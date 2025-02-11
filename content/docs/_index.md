@@ -8,6 +8,5 @@ next: "/write-ups/wu1"
 {{< cards >}}
   {{< card link="write-ups/wu1" title="Write-up 1" icon="book-open" >}}
   {{< card link="write-ups/wu2" title="Write-up 2" icon="book-open" >}}
-  {{< card link="write-ups/wu3" title="Write-up 3" icon="book-open" >}}
 {{< /cards >}}
 
