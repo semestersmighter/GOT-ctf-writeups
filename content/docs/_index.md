@@ -3,16 +3,10 @@ title: Documentation
 next: first-page
 ---
 
-This is a demo of the theme's documentation layout.
 
-## Hello, World!
+## Les writes up des différentes attaques de ce CTF Game Of thrones
 
-```go {filename="main.go"}
-package main
+```python {filename="python-attack.py"}
 
-import "fmt"
-
-func main() {
-    fmt.Println("Hello, World!")
-}
+print("attaque")
 ```

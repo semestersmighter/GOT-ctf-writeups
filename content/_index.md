@@ -2,16 +2,13 @@
 title: My Site
 toc: false
 ---
-
-This is the landing page.
+Page d'accueil 
 
 ## Explore
 
 {{< cards >}}
-  {{< card link="docs" title="Docs" icon="book-open" >}}
-  {{< card link="about" title="About" icon="user" >}}
+  {{< card link="docs/write-ups" title="Write-ups" icon="book-open" >}}
 {{< /cards >}}
 
 ## Documentation
 
-For more information, visit [Hextra](https://imfing.github.io/hextra).
