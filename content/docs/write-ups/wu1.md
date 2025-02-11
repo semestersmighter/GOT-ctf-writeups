@@ -1,5 +1,5 @@
 ---
-title: Writes-up 1
+title: Write-up 1
 next: "/write-ups/wu2"
 prev: ""
 ---
