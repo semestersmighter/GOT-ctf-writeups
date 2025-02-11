@@ -1,7 +1,7 @@
 ---
-title: Writes-up 3
-next: "/write-ups/wu4"
-prev: "/write-ups/wu2"
+title: Writes-up 4
+next: "/write-ups/wu5"
+prev: "/write-ups/wu3"
 ---
 
 # 🗂️ Injection SQL (CWE-89) UNION
