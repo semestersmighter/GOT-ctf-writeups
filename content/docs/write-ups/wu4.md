@@ -1,6 +1,7 @@
 ---
 title: Write-up 4
-prev: "/write-ups/wu2"
+next: "/write-ups/wu5"
+prev: "/write-ups/wu3"
 ---
 
 
