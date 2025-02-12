@@ -32,8 +32,7 @@ Page de login du Conseil des Lannister :  http://lannister.castral-roc.lannispor
 Inspecter la page pour trouver les champs du formulaire de connexion.
 On voit que le formulaire utilise un token CSRF pour se protéger des attaques CSRF.
 
-> [!NOTE]
-> CSRF : Cross-Site Request Forgery, une attaque qui consiste à forcer un utilisateur à exécuter des actions non désirées sur un site auquel il est authentifié.
+> 📝 **CSRF** : Cross-Site Request Forgery est une attaque qui force un utilisateur à exécuter des actions non désirées sur un site Web sur lequel il est authentifié.
 
 Il faut donc trouver un moyen de contourner cette protection.
 
