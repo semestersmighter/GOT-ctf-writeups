@@ -1,7 +1,6 @@
 ---
-title: Write-up 6
-next: "/write-ups/wu7"
-prev: "/write-ups/wu5"
+title: Write-up 7
+prev: "/write-ups/wu6"
 ---
 
 # 🏰 CTF - Injection SQL Boolean Blind & Hash MD5 Faible
