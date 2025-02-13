@@ -1,5 +1,5 @@
 ---
-title: CWE-79 et CWE-1004 - Stored XSS & Vol de Cookie
+title: 2 | CWE-79 et CWE-1004 - Stored XSS & Vol de Cookie
 next: "/write-ups/wu3"
 prev: "/write-ups/wu1"
 ---
