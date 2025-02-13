@@ -1,5 +1,5 @@
 ---
-title: CWE-89 - Injection SQL UNION
+title: 3 - Injection SQL UNION
 next: "/write-ups/wu4"
 prev: "/write-ups/wu2"
 ---
