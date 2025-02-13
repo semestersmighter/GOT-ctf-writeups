@@ -1,5 +1,5 @@
 ---
-title: CWE-307 - Brute Force sur la page de login
+title: write-up 5
 next: "/write-ups/wu6"
 prev: "/write-ups/wu4"
 ---

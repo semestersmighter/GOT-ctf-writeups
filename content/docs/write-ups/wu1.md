@@ -1,5 +1,5 @@
 ---
-title: CWE-200 - Exposition d’informations sensibles
+title: write-up 1
 next: "/write-ups/wu2"
 ---
 
