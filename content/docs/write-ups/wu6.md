@@ -63,7 +63,7 @@ Répète en changeant `1, 1` par `2, 1`, `3, 1`… jusqu'à obtenir le hash MD5 
 
 ## ⚡ Étape 4 : Automatiser l’extraction avec Python
 Pour éviter une extraction manuelle, utilise ce script **Python** :
-```python
+```python {filename="extract_md5.py"}
 import requests
 
 URL = "http://lannister.castral-roc.lannisport.south/entourage_lannister.php"
