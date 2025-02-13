@@ -1,5 +1,5 @@
 ---
-title: write-up 4
+title: Brute force sur fichiers
 next: "/write-ups/wu5"
 prev: "/write-ups/wu3"
 ---

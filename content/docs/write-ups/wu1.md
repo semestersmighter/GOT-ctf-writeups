@@ -1,5 +1,5 @@
 ---
-title: write-up 1
+title: CWE-200 - Exposition d’informations sensibles
 next: "/write-ups/wu2"
 ---
 
