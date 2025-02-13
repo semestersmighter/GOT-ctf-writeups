@@ -9,8 +9,8 @@ Pour cela, il injecte un **XSS stocké** dans le **livre d’or** afin de récup
 ---
 
 ## ⚙️ Environnement
-- **Cible :** `lannisport.south`
-- **Page vulnérable :** `livre_dor.php`
+- **Cible :** lannisport.south
+- **Page vulnérable :** livre_dor.php
 - **Langage :** PHP / JavaScript
 
 ---
@@ -94,8 +94,8 @@ driver.quit()
 cat stolen_cookies.txt
 ```
 ✅ **Utilisation du cookie volé pour usurper la session du garde** :
-- Ouvrir les outils développeur (`F12`) > **Application** > **Cookies**.
-- Modifier `PHPSESSID` avec la valeur capturée.
+- Ouvrir les outils développeur (F12) > **Application** > **Cookies**.
+- Modifier PHPSESSID avec la valeur capturée.
 - Recharger la page.
 
 **🚀 Succès ! L’attaque est réalisée et le flag récupéré !** 🔥
@@ -103,8 +103,8 @@ cat stolen_cookies.txt
 ---
 
 ## 🔒 Mitigation & Sécurisation
-- **Activer `HttpOnly` sur les cookies** pour empêcher l’accès JavaScript.
-- **Filtrer les entrées utilisateur** (`htmlspecialchars()`) pour empêcher le XSS.
+- **Activer HttpOnly sur les cookies** pour empêcher l’accès JavaScript.
+- **Filtrer les entrées utilisateur** (htmlspecialchars()) pour empêcher le XSS.
 - **Utiliser CSP (Content Security Policy)** pour bloquer les scripts inline.
 
 ---
