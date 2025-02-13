@@ -1,10 +1,3 @@
----
-title: Write-up 4
-next: "/write-ups/wu5"
-prev: "/write-ups/wu3"
----
-
-
 # 🏰 Brute Force sur les Fichiers et Répertoires - Castral-Roc
 
 ## 🎯 Objectif
@@ -47,7 +40,7 @@ gobuster dir -u http://lannister.castral-roc.lannisport.south \
 /private               (200 OK)
 /high_login.php        (200 OK)
 ```
-🎯 **Le flag high_login.php est trouvé !** 🎯
+🎯 **Le flag `high_login.php` est trouvé !** 🎯
 
 ---
 
