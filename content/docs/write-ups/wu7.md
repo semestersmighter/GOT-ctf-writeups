@@ -1,5 +1,5 @@
 ---
-title: 7 | CWE-78 - Injection de Commande
+title: CWE-78 - Injection de Commande
 prev: "/write-ups/wu6"
 ---
 

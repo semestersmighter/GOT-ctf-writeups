@@ -1,5 +1,5 @@
 ---
-title: 6 | CWE-89 & CWE-328 - Injection SQL Boolean Blind & Hash MD5 Faible
+title: CWE-89 & CWE-328 - Injection SQL Boolean Blind & Hash MD5 Faible
 next: "/write-ups/wu7"
 prev: "/write-ups/wu5"
 ---
