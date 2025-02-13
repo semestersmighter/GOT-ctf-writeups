@@ -1,3 +1,8 @@
+---
+title: CWE-200 - Exposition d’informations sensibles
+next: "/write-ups/wu2"
+---
+
 # 🗂️ Exposition d’informations sensibles CWE-200
 
 ## 🎯 Objectif

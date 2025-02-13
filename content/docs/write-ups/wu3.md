@@ -1,3 +1,9 @@
+---
+title: CWE-89 - Injection SQL UNION
+next: "/write-ups/wu4"
+prev: "/write-ups/wu2"
+---
+
 # 🗂️ Injection SQL (CWE-89) UNION
 
 ## 🎯 Objectif

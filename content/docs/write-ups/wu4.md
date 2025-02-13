@@ -1,3 +1,9 @@
+---
+title: Brute force sur fichiers
+next: "/write-ups/wu5"
+prev: "/write-ups/wu3"
+---
+
 # 🏰 Brute Force sur les Fichiers et Répertoires - Castral-Roc
 
 ## 🎯 Objectif

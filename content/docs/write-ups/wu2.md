@@ -1,3 +1,9 @@
+---
+title: CWE-79 et CWE-1004 - Stored XSS & Vol de Cookie
+next: "/write-ups/wu2"
+prev: "/write-ups/wu1"
+---
+
 # 🏰 Stored XSS & Vol de Cookie - Livre d'Or de Lannisport
 
 ## 🎯 Objectif

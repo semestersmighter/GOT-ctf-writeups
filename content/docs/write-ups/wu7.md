@@ -1,7 +1,8 @@
 ---
-title: Write-up 7
+title: CWE-78 - Injection de Commande
 prev: "/write-ups/wu6"
 ---
+
 # CTF - Injection de Commande (CWE-78) : Suppression du Rapport Secret  
 
 ## Objectif  
