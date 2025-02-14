@@ -9,14 +9,14 @@ prev: "/write-ups/wu3"
 ## 🎯 Objectif
 John cherche une entrée cachée pour infiltrer **Castral-Roc**. Il doit **brute-forcer les fichiers et répertoires** sur le sous-domaine **lannister.castral-roc.lannisport.south** afin de découvrir **une page d’authentification secrète**.
 
-**Flag attendu :** high_login.php
+**Flag attendu :** `high_login.php`
 
 ---
 
 ## ⚙️ Environnement
-- **Cible :** lannister.castral-roc.lannisport.south
-- **Outil utilisé :** gobuster
-- **Wordlist :** /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+- **Cible :** `lannister.castral-roc.lannisport.south`
+- **Outil utilisé :** `gobuster`
+- **Wordlist :** `/home/attaquant/CTF/4.SearchLoginLannister/common.txt`
 
 ---
 
@@ -32,11 +32,11 @@ John cherche une entrée cachée pour infiltrer **Castral-Roc**. Il doit **brute
 
 ---
 
-## 🔍 Étape 2 : Scanner les fichiers avec gobuster
+## 🔍 Étape 2 : Scanner les fichiers avec `gobuster`
 Lancer un scan des répertoires pour détecter des fichiers cachés :
 ```bash
 gobuster dir -u http://lannister.castral-roc.lannisport.south \
--w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 50 -x php,html,txt
+-w /home/attaquant/CTF/4.SearchLoginLannister/common.txt -t 50 -x php,html
 ```
 
 **Résultat attendu :**
@@ -51,37 +51,44 @@ gobuster dir -u http://lannister.castral-roc.lannisport.south \
 ---
 
 ## 🚀 Étape 3 : Contourner les protections
-Si gobuster ne trouve rien, exclure les erreurs 403 :
+Si `gobuster` ne trouve rien, exclure les erreurs `403` :
 ```bash
 gobuster dir -u http://lannister.castral-roc.lannisport.south \
--w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 50 -x php,html,txt -b 403
+-w /home/attaquant/CTF/4.SearchLoginLannister/common.txt -t 50 -x php,html -b 403
 ```
 
 Si le serveur bloque encore le scan, tester avec un **User-Agent différent** :
 ```bash
 gobuster dir -u http://lannister.castral-roc.lannisport.south \
--w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 50 -x php,html,txt \
+-w /home/attaquant/CTF/4.SearchLoginLannister/common.txt -t 50 -x php,html \
 -a "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
 ```
 
+Sinon
+```bash
+gobuster dir -u http://lannister.castral-roc.lannisport.south/ \
+-w /home/attaquant/CTF/4.SearchLoginLannister/common.txt \
+-x php,html -t 50 -o gobuster_results.txt \
+--exclude-length 162
+```
 ---
 
 ## 🎯 Étape 4 : Validation du Flag
-Une fois high_login.php trouvé, confirmer en accédant à :
+Une fois `high_login.php` trouvé, confirmer en accédant à :
 ```
 http://lannister.castral-roc.lannisport.south/high_login.php
 ```
-**Flag final :** high_login.php
+**Flag final :** `high_login.php`
 
 ---
 
 ## 🔒 Mitigation & Sécurisation
-- **Désactiver l’indexation des fichiers (autoindex off;).**
-- **Restreindre l’accès avec un .htaccess ou une configuration Nginx.**
-- **Utiliser fail2ban pour bloquer les scans abusifs.**
+- **Désactiver l’indexation des fichiers (`autoindex off;`).**
+- **Restreindre l’accès avec un `.htaccess` ou une configuration Nginx.**
+- **Utiliser `fail2ban` pour bloquer les scans abusifs.**
 
 ---
 
 ## 🏆 Conclusion
-- **gobuster a révélé une page cachée (high_login.php).**
+- **`gobuster` a révélé une page cachée (`high_login.php`).**
 - **L’attaque est réussie, l’entrée vers Castral-Roc est trouvée !** 🔥
